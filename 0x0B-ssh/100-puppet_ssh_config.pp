@@ -1,7 +1,16 @@
-Your machine has an SSH configuration file for the local SSH client, let’s configure it to our needs so that you can connect to a server without typing a password. Share your SSH client configuration in your answer file.
+# Setting up my client config file
+include stdlib
 
-Requirements:
+file_line { 'Turn off passwd auth':
+  ensure => present,
+  path   => '/etc/ssh/ssh_config',
+  line   => '    PasswordAuthentication no',
+  replace => true,
+}
 
-    Your SSH client configuration must be configured to use the private key ~/.ssh/school
-    Your SSH client configuration must be configured to refuse to authenticate using a password
-
+file_line { 'Delare identity file':
+  ensure => present,
+  path   => '/etc/ssh/ssh_config',
+  line   => '     IdentityFile ~/.ssh/school',
+  replace => true,
+}
